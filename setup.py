@@ -14,7 +14,7 @@ setup(
     version='0.1.{0}.{1}.{2}.{3}.{4}'.format(now.year, now.month, now.day, now.hour, now.minute),
     license="Apache",
     url="https://scopuli.tatarnikov.org",
-    packages=['Scopuli', 'Scopuli.Interfaces'],
+    packages=find_packages(exclude=["tests"]),
     long_description=open(join(dirname(__file__), 'README.rst')).read(),
     include_package_data=True
 )
