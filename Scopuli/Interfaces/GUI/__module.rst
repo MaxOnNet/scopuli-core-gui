@@ -1,14 +1,14 @@
-Interfaces.GUI
-==============
+Scopuli.Interfaces.GUI
+======================
 
-.. autoclass:: Interfaces.GUI.LogHandler
+.. autoclass:: Scopuli.Interfaces.GUI.LogHandler
     :members:
     :undoc-members:
     :private-members:
     :special-members:
     :show-inheritance:
 
-.. autoclass:: Interfaces.GUI.ResourceChecker
+.. autoclass:: Scopuli.Interfaces.GUI.ResourceChecker
     :members:
     :undoc-members:
     :private-members:
@@ -16,7 +16,7 @@ Interfaces.GUI
     :show-inheritance:
 
 
-.. automodule:: Interfaces.GUI
+.. automodule:: Scopuli.Interfaces.GUI
     :members:
     :inherited-members:
     :undoc-members:
@@ -29,6 +29,6 @@ Interfaces.GUI
     :maxdepth: 2
     :titlesonly:
 
+    ApplicationModule
     WindowModule
-    WindowDataProduct
     WidgetModule

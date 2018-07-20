@@ -98,9 +98,9 @@ class Application(Gtk.Application):
     
     
     def _check_gui(self):
-        if int(self.config.get("gui", "", "gtk-major", "0")) == int(Gtk.get_major_version()) \
-                and int(self.config.get("gui", "", "gtk-minor", "0")) == int(Gtk.get_minor_version()) \
-                and int(self.config.get("gui", "", "gtk-micro", "0")) == int(Gtk.get_micro_version()):
+        if int(self.config.get("gui", "", "gtk_major", "0")) == int(Gtk.get_major_version()) \
+                and int(self.config.get("gui", "", "gtk_minor", "0")) == int(Gtk.get_minor_version()) \
+                and int(self.config.get("gui", "", "gtk_micro", "0")) == int(Gtk.get_micro_version()):
             log.debug("Рабочая версия GTK.")
             
             IGUI.ResourceChecker(self)
@@ -110,9 +110,9 @@ class Application(Gtk.Application):
         log.critical("Warning: GTK version mistmatch!")
         log.critical(
             "Current GTK version is: {0}.{1}.{2}".format(Gtk.get_major_version(), Gtk.get_minor_version(), Gtk.get_micro_version()))
-        log.critical("Need GTK version is: {0}.{1}.{2}".format(self.config.get("gui", "", "gtk-major", "0"),
-                                                               self.config.get("gui", "", "gtk-minor", "0"),
-                                                               self.config.get("gui", "", "gtk-micro", "0")))
+        log.critical("Need GTK version is: {0}.{1}.{2}".format(self.config.get("gui", "", "gtk_major", "0"),
+                                                               self.config.get("gui", "", "gtk_minor", "0"),
+                                                               self.config.get("gui", "", "gtk_micro", "0")))
         
         self.quit()
     

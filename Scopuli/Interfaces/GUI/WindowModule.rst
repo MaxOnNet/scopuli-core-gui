@@ -1,7 +1,7 @@
-Interfaces.GUI.WindowModule
-===========================
+Scopuli.Interfaces.GUI.WindowModule
+===================================
 
-.. automodule:: Interfaces.GUI.WindowModule
+.. automodule:: Scopuli.Interfaces.GUI.WindowModule
     :members:
     :undoc-members:
     :private-members:

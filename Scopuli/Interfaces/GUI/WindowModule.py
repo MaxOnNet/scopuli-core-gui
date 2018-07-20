@@ -39,7 +39,7 @@ class Window(object):
     
     
     def _init_builder(self):
-        self.builder_python = bool(int(self.application.config.get("gui", "", "gtk-build-python", "0")))
+        self.builder_python = bool(int(self.application.config.get("gui", "", "gtk_build_python", "0")))
         self.builder_glade = self.application.config.get("gui", self.__class__.__name__, "glade", "")
         
         if os.path.isfile(self.builder_glade):
@@ -104,7 +104,7 @@ class Window(object):
             if gui_object.get_property("storage-type") is Gtk.ImageType.STOCK:
                 if gui_object.get_property("stock") != "":
                     gui_object_file = self.application.config.get("gui", self.__class__.__name__,
-                                                                  "image-{0}".format(gui_object.get_property("stock")), "None")
+                                                                  "image_{0}".format(gui_object.get_property("stock")), "None")
                     
                     gui_object_width = gui_object.get_property("width-request")
                     gui_object_height = gui_object.get_property("height-request")

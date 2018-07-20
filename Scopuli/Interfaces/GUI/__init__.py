@@ -20,6 +20,7 @@ import os
 import sys
 import logging
 
+from Scopuli.Interfaces.GUI.ApplicationModule import Application
 from Scopuli.Interfaces.GUI.WindowModule import Window
 from Scopuli.Interfaces.GUI.WidgetModule import Widget
 
@@ -51,7 +52,7 @@ class ResourceChecker:
         for group in self.configuration.getElementsByTagName(group_name):
             for item in group.childNodes:
                 if item.nodeType == 1:
-                    for attr in ["glade", "image-splash", "image-logo"]:
+                    for attr in ["glade", "image_splash", "image_logo"]:
                         if item.hasAttribute(attr):
                             attr_value = self.application.config.get(group_name, item.nodeName, attr, "")
                             
