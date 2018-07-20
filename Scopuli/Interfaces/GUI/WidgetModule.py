@@ -19,10 +19,13 @@ import os
 import gi
 import logging
 
-from gi.repository import GObject, Gdk, Gtk
 
+gi.require_version('Gdk', '3.0')
 gi.require_version('Gtk', '3.0')
 log = logging.getLogger(__name__)
+
+
+from gi.repository import GObject, Gdk, Gtk
 
 
 class Widget(object):

@@ -20,11 +20,14 @@ import os
 import sys
 import logging
 
-from gi.repository import GObject, Gdk, Gtk, GdkPixbuf
-from importlib import import_module
 
+gi.require_version('Gdk', '3.0')
 gi.require_version('Gtk', '3.0')
 log = logging.getLogger(__name__)
+
+
+from gi.repository import GObject, Gdk, Gtk, GdkPixbuf
+from importlib import import_module
 
 
 class Window(object):
@@ -36,6 +39,7 @@ class Window(object):
     
     
     def _init_builder(self):
+        self.builder_python = bool(int(self.application.config.get("gui", "", "gtk-build-python", "0")))
         self.builder_glade = self.application.config.get("gui", self.__class__.__name__, "glade", "")
         
         if os.path.isfile(self.builder_glade):
@@ -84,7 +88,7 @@ class Window(object):
     
     def _init_builder_widget(self, gui_object, gui_object_element_id):
         widget_name = gui_object_element_id.split("_")[1]
-        widget_module = "GUI.Widgets".format(widget_name)
+        widget_module = "Scopuli.GUI.Widgets".format(widget_name)
         widget = getattr(import_module(widget_module), widget_name)
         
         if widget:

@@ -23,14 +23,18 @@ import logging
 import logging.handlers
 import time
 
+
+gi.require_version('Gdk', '3.0')
+gi.require_version('Gtk', '3.0')
+log = logging.getLogger(__name__)
+
+
 from gi.repository import GObject, Gdk, Gtk, Gio
 
 from Scopuli.Interfaces.Config import Config
 
 import Scopuli.Interfaces.GUI as IGUI
 
-gi.require_version('Gtk', '3.0')
-log = logging.getLogger(__name__)
 
 class Application(Gtk.Application):
     __gsignals__ = {
@@ -123,8 +127,8 @@ class Application(Gtk.Application):
 
     def _splash_load(self, application_onload=True):
         if bool(int(self.config.get("gui", "", "use_splash", "0"))):
-            self.windowSplash = GUI.Windows.MainSplash(self, application_onload=application_onload)
-            self.add_window(self.windowSplash.window)
+            if self.windowSplash is not None:
+                self.add_window(self.windowSplash.window)
     
     
     def _splash_unload(self):
@@ -141,28 +145,39 @@ class Application(Gtk.Application):
     def _session_close(self):
         raise Exception("Не реализовано")
     
+    def _synchronizers_init(self):
+        raise Exception("Не реализовано")
+    
+    def _synchronizers_run(self):
+        raise Exception("Не реализовано")
+    
+    def _synchronizers_stop(self):
+        raise Exception("Не реализовано")
     
     def _main_prepare(self):
         self._database_init()
-
         self._session_init()
-
+        self._synchronizers_init()
+        self._synchronizers_run()
     
     
     def _main_load(self):
         log.info("Загрузка основного окна")
-        self.windowMain = GUI.Windows.Main(self)
-        self.windowMain.window.connect('delete-event', self._main_destroy)
-        
-        self.add_window(self.windowMain.window)
-        self.windowMain.window.present()
-    
+        if self.windowMain is not None:
+            self.windowMain.window.connect('delete-event', self._main_destroy)
+            
+            self.add_window(self.windowMain.window)
+            self.windowMain.window.present()
+        else:
+            log.critical("Main Window не предопределен")
+            self._main_unload()
     
     def _main_destroy(self, widget, args):
         log.info("Выгрузка основного окна")
-        
-        self.windowMain.window.hide()
-        self.remove_window(self.windowMain.window)
+
+        if self.windowMain is not None:
+            self.windowMain.window.hide()
+            self.remove_window(self.windowMain.window)
         
         if bool(int(self.config.get("gui", "", "use_splash", "0"))):
             self._splash_load(application_onload=False)
@@ -171,7 +186,7 @@ class Application(Gtk.Application):
     
     
     def _main_unload(self):
-        self._synhronizers_stop()
+        self._synchronizers_stop()
         self._session_close()
         self._database_close()
         
