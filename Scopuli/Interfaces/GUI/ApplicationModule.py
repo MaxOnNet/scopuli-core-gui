@@ -14,6 +14,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+""" """
 
 import gi
 import sys
@@ -63,7 +64,7 @@ class Application(Gtk.Application):
         threading.current_thread().name = 'main'
         
         logging.basicConfig(level=int(self.config.get("logging", "console", "level", "10")), stream=sys.stdout,
-                            format='%(asctime)s [%(module)15s] [%(funcName)19s] [%(lineno)4d] [%(levelname)7s] [%(threadName)4s] %(message)s')
+                            format='%(asctime)s [%(module)18s] [%(funcName)19s] [%(lineno)4d] [%(levelname)7s] [%(threadName)4s] %(message)s')
         
         log_handler_gui = IGUI.LogHandler(self)
         log_handler_gui.setLevel(int(self.config.get("logging", "splash", "level", "20")))
@@ -71,7 +72,7 @@ class Application(Gtk.Application):
         log_handler_console = logging.StreamHandler()
         log_handler_console.setLevel(int(self.config.get("logging", "console", "level", "10")))
         log_handler_console.setFormatter(
-            logging.Formatter('%(asctime)s [%(module)15s] [%(funcName)19s] [%(lineno)4d] [%(levelname)7s] [%(threadName)4s] %(message)s'))
+            logging.Formatter('%(asctime)s [%(module)18s] [%(funcName)19s] [%(lineno)4d] [%(levelname)7s] [%(threadName)4s] %(message)s'))
         
         if bool(int(self.config.get("logging", "", "use_file", "0"))):
             log_handler_file = logging.handlers.TimedRotatingFileHandler(self.config.get("logging", "file", "path", "4gain.log"),
@@ -80,7 +81,7 @@ class Application(Gtk.Application):
                                                                          backupCount=int(self.config.get("logging", "file", "count", "1")))
             log_handler_file.setLevel(int(self.config.get("logging", "file", "level", "10")))
             log_handler_file.setFormatter(logging.Formatter(
-                '%(asctime)s [%(module)15s] [%(funcName)19s] [%(lineno)4d] [%(levelname)7s] [%(threadName)4s] %(message)s'))
+                '%(asctime)s [%(module)18s] [%(funcName)19s] [%(lineno)4d] [%(levelname)7s] [%(threadName)4s] %(message)s'))
             
             logging.getLogger('').addHandler(log_handler_file)
         
@@ -89,7 +90,7 @@ class Application(Gtk.Application):
                                                                          int(self.config.get("logging", "syslog", "address_port", "514"))))
             log_handler_syslog.setLevel(int(self.config.get("logging", "file", "level", "10")))
             log_handler_syslog.setFormatter(logging.Formatter(
-                    '%(asctime)s [%(module)15s] [%(funcName)19s] [%(lineno)4d] [%(levelname)7s] [%(threadName)4s] %(message)s'))
+                    '%(asctime)s [%(module)18s] [%(funcName)19s] [%(lineno)4d] [%(levelname)7s] [%(threadName)4s] %(message)s'))
             
             logging.getLogger('').addHandler(log_handler_syslog)
         

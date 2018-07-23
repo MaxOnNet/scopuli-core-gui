@@ -26,7 +26,7 @@ setup(
     name='scopuli_core_gui',
     author='Viktor Tatarnikov',
     author_email='viktor@tatarnikov.org',
-    namespace_packages=['Scopuli'],  # line 8
+    namespace_packages=['Scopuli'],
     platforms='any',
     zip_safe=False,
     version='0.1.{0}.{1}.{2}.{3}.{4}'.format(now.year, now.month, now.day, now.hour, now.minute),
